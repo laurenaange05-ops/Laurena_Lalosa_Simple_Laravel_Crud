@@ -10,21 +10,18 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class VisitorFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            'name'=>fake()->name(),
-            'address'=>fake()->address(),
-            'position'=>fake()->randomLetter(),
-
-            
-    
-            //
+            'name' => fake()->name(),
+            'address' => fake()->address(),
+            'position' => fake()->randomElement([
+                'Student',
+                'Teacher',
+                'Employee',
+                'Visitor',
+                'Staff',
+            ]),
         ];
     }
 }
