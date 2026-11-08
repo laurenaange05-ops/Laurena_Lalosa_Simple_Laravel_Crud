@@ -1,8 +1,12 @@
-
 FROM richarvey/nginx-php-fpm:3.1.6
 
 WORKDIR /var/www/html
 
+# Install Laravel dependencies
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+# Copy Laravel project
 COPY . .
 
 ENV SKIP_COMPOSER 1
