@@ -13,13 +13,12 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-COPY composer.json composer.lock ./
-
-RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-
+# Copy Laravel project first, including artisan
 COPY . .
 
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Install dependencies after artisan is available
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader \
+    && chown -R www-data:www-data storage bootstrap/cache
 
 COPY docker-start.sh /start.sh
 
