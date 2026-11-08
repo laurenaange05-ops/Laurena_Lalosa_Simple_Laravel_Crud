@@ -1,5 +1,5 @@
+text
+vendor
+node_modules
 .env
 .git
-node_modules
-vendor
-storage/logs
